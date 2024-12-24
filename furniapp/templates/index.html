@@ -1,0 +1,280 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% load static %}
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+
+    <title>FurniQuest</title>
+  </head>
+  <body>
+  
+  
+    <nav>
+      <div class="nav__header">
+        <div class="nav__logo">
+          <a href="#" class="logo">FurniQuest</a>
+        </div>
+        <div class="nav__menu__btn" id="menu-btn">
+          <i class="ri-menu-line"></i>
+        </div>
+      </div>
+      <ul class="nav__links" id="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#product">Products</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="{% url 'login' %}">Login</a></li>
+        <h1>{{ cart_count }}</h1>
+        <div class="ml-auto">
+          <a href="{% url 'view_cart' %}" class="btn btn-outline-secondary position-relative">
+              <i class="fas fa-shopping-cart"></i>
+              <span class="badge badge-danger position-absolute top-0 start-100 translate-middle" style="font-size: 0.75rem; color:red">
+                 {{ cart_count }}
+              </span>
+          </a>
+      </div>
+      </ul>
+      <div class="nav__search" id="nav-search">
+        <input type="text" placeholder="Search" />
+        <span><i class="ri-search-2-line"></i></span>
+      </div>
+    </nav>
+
+    <header class="section__container header__container" id="home">
+      <div class="header__image">
+        <img src="{% static 'images/header.jpg' %}" alt="header" />
+      </div>
+      <div class="header__content">
+        <div>
+          <h1>Designed for living, build to last.</h1>
+          <p>
+            We will help you to make an elegant and luxurious interior designed
+            by professional interior designer.
+          </p>
+        </div>
+      </div>
+    </header>
+    <section class="section__container product__container" id="product">
+      <h2 class="section__header">Products</h2> 
+      <div class="container mt-5">
+        <div class="row">
+            {% for product in products %}
+                <div class="col-md-4 mb-4">
+                    <a href="{% url 'product_detail' product.slug %}" class="text-decoration-none">
+                        <div class="card product__card h-100">
+                            <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ product.name }}</h5>
+                                <p class="card-text">R {{ product.price }}</p>
+                            </div>
+                            <div class="card-footer">
+                                <a href="{% url 'add_to_cart' product.id %}" class="btn btn-outline-warning w-100">Add to Cart</a>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    
+         
+    </section>
+
+    <section class="section__container deals__container">
+      <div class="deals__card">
+        <h2 class="section__header">Hot 🔥 deals for you</h2>
+        <p>Online shopping for retail sales direct to consumers</p>
+      </div>
+      <div class="deals__card">
+        <span><i class="ri-cash-line"></i></span>
+        <h4>1.5% cashback</h4>
+        <p>Earn a 5% cashback reward on every furniture purchase you make!</p>
+      </div>
+      <div class="deals__card">
+        <span><i class="ri-calendar-schedule-line"></i></span>
+        <h4>30 day terms</h4>
+        <p>
+          Take advantage of our 30-day payment terms, completely interest-free!
+        </p>
+      </div>
+      <div class="deals__card">
+        <span><i class="ri-money-rupee-circle-line"></i></span>
+        <h4>Save money</h4>
+        <p>
+          Discover unbeatable prices and save big money on top-quality
+          furniture!
+        </p>
+      </div>
+    </section>
+
+    <section class="section__container about__container" id="about">
+      <div class="about__header">
+        <div>
+          <h2 class="section__header">About us</h2>
+          <p class="section__description">
+            Our passion for exceptional craftsmanship drives us to curate the
+            best pieces for every room in your house.
+          </p>
+        </div>
+        <button class="about__btn">Learn More</button>
+      </div>
+      <div class="about__content">
+        <div class="about__image">
+          <img src="{% static 'images/about.png' %}" alt="about" />
+        </div>
+        <div class="about__grid">
+          <div class="about__card">
+            <h3>1.</h3>
+            <h4>Who we are</h4>
+            <p>
+              We are the furn.shop offering the most recommended chairs
+            </p>
+          </div>
+          <div class="about__card">
+            <h3>2.</h3>
+            <h4>What do we do</h4>
+            <p>
+              We offer the most highly recommended chair with the best quality.
+            </p>
+          </div>
+          <div class="about__card">
+            <h3>3.</h3>
+            <h4>How do we help</h4>
+            <p>Use our website to get the wooden made chairs with quality.</p>
+          </div>
+          <div class="about__card">
+            <h3>4.</h3>
+            <h4>Create success story</h4>
+            <p>
+              With access to online purchasing to everyone.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="section__container client__container">
+      <div class="client__content">
+        <h2 class="section__header">What our happy client say</h2>
+        <p class="section__description">
+          Testimonials Highlighting Our Commitment to Quality, Exceptional
+          Service, and Customer Satisfaction
+        </p>
+        <!-- Slider main container -->
+        <div class="swiper">
+          <!-- Additional required wrapper -->
+          <div class="swiper-wrapper">
+            <!-- Slides -->
+            <div class="swiper-slide">
+              <div class="client__card">
+                <img src="{% static 'images/myFace.png' %}" alt="user" />
+                <div>
+                  <p>
+                    The 30-day terms made it easy for us to furnish our new home
+                    without financial stress. Highly recommended!
+                  </p>
+                  <h4>Kgaogelo Mthimkhulu</h4>
+                  <h5>Customer 1</h5>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="client__card">
+                <img src="assets/user-1.jpg" alt="user" />
+                <div>
+                  <p>
+                    FurniQuest transformed my living space with their beautiful
+                    and affordable furniture. The 5% cashback was a delightful
+                    bonus!
+                  </p>
+                  <h4>Concious</h4>
+                  <h5>Customer 2</h5>
+                </div>
+              </div>
+            </div> 
+       
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer" id="contact">
+      <div class="section__container footer__container">
+        <div class="footer__col">
+          <div class="footer__logo">
+            <a href="#" class="logo">FurniQuest</a>
+          </div>
+          <p>
+            Join us in transforming your living spaces with furniture that
+            blends elegance and practicality seamlessly.
+          </p>
+          <ul class="footer__socials">
+            <li>
+              <a href="#"><i class="ri-facebook-fill"></i></a>
+            </li>
+            <li>
+              <a href="#"><i class="ri-twitter-fill"></i></a>
+            </li>
+            <li>
+              <a href="#"><i class="ri-linkedin-fill"></i></a>
+            </li>
+            <li>
+              <a href="#"><i class="ri-pinterest-fill"></i></a>
+            </li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h4>Contact Us</h4>
+          <ul class="footer__links">
+            <li><a href="mailto:221952721@edu.vut.ac.za">Via an Email</a></li>
+            <li><a href="tel:+27695639464">Call</a></li> 
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h4>Support</h4>
+          <ul class="footer__links"> 
+            <li><a href="#">FAQs</a></li>
+            <li><a href="#">Contact Support</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h4>Address</h4>
+          <ul class="footer__links">
+            <li><a href="#">South Africa</a></li>
+            <li><a href="#">Gauteng</a></li>
+            <li><a href="#">Vereeniging, Bedworthpark</a></li>
+            <li><a href="#">1939</a></li> 
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bar">
+        Copyright © 2024 our website. All rights reserved.
+      </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+
+  </body>
+</html>
